@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import "./Dashboard.css";
 function Dashboard() {
   const [tasks, setTasks] = useState([]);
@@ -10,19 +10,34 @@ function Dashboard() {
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
   const [editStatus, setEditStatus] = useState("pending");
+  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [role, setRole] = useState('user');
+  const [currentUserId, setCurrentUserId] = useState('');
   const navigate = useNavigate();
+
+  const getUserIdFromToken = (token) => {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.userId || '';
+    } catch (error) {
+      return '';
+    }
+  };
+
+  const isOwnTask = (task) => {
+    const ownerId = typeof task.userId === 'object' ? task.userId?._id : task.userId;
+    const legacyOwnerId = typeof task.createdBy === 'object' ? task.createdBy?._id : task.createdBy;
+    return ownerId === currentUserId || legacyOwnerId === currentUserId;
+  };
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/tasks", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
-
-      setTasks(res.data);
+      setErrorMessage('');
+      const res = await api.get('/tasks');
+      setTasks(res.data.data || []);
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error.response?.data?.message || 'Failed to load tasks');
     }
   };
 
@@ -30,60 +45,49 @@ function Dashboard() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "http://localhost:5000/api/tasks",
-        { title, description },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      setMessage('');
+      setErrorMessage('');
+      await api.post('/tasks', { title, description });
 
       setTitle("");
       setDescription("");
+      setMessage('Task created successfully');
       fetchTasks();
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error.response?.data?.message || 'Failed to create task');
     }
   };
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
+      setMessage('');
+      setErrorMessage('');
+      await api.delete(`/tasks/${id}`);
+      setMessage('Task deleted successfully');
       fetchTasks();
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error.response?.data?.message || 'Failed to delete task');
     }
   };
 
   const saveUpdate = async (id) => {
     try {
-      await axios.put(
-        `http://localhost:5000/api/tasks/${id}`,
-        {
-          title: editTitle,
-          description: editDescription,
-          status: editStatus,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      setMessage('');
+      setErrorMessage('');
+      await api.put(`/tasks/${id}`, {
+        title: editTitle,
+        description: editDescription,
+        status: editStatus,
+      });
 
       setEditingTask(null);
       setEditTitle("");
       setEditDescription("");
       setEditStatus("pending");
+      setMessage('Task updated successfully');
       fetchTasks();
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error.response?.data?.message || 'Failed to update task');
     }
   };
 
@@ -96,6 +100,7 @@ function Dashboard() {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     navigate("/login");
   };
 
@@ -105,6 +110,10 @@ function Dashboard() {
       navigate("/login");
       return;
     }
+
+    // Read role captured during login so UI can label scope correctly.
+    setRole(localStorage.getItem('role') || 'user');
+    setCurrentUserId(getUserIdFromToken(token));
     fetchTasks();
   }, [navigate]);
 
@@ -115,6 +124,9 @@ function Dashboard() {
         <h2>Dashboard</h2>
         <button className="btn-secondary" type="button" onClick={logout}>Logout</button>
       </div>
+
+      {message && <p>{message}</p>}
+      {errorMessage && <p>{errorMessage}</p>}
 
       <form className="task-form" onSubmit={createTask}>
         <input
@@ -135,7 +147,9 @@ function Dashboard() {
         <button className="btn-primary" type="submit">Create Task</button>
       </form>
 
-      <h3>Your Tasks</h3>
+      {role === 'admin' && <p>Admin can modify only own tasks.</p>}
+
+      <h3>{role === 'admin' ? 'All Tasks' : 'Your Tasks'}</h3>
 
       <div className="task-list">
       {tasks.map((task) => (
@@ -169,10 +183,10 @@ function Dashboard() {
                 {task.title} - {task.status}
               </p>
               <p className="task-description">{task.description}</p>
-              <div className="task-actions">
+              {isOwnTask(task) && <div className="task-actions">
                 <button className="btn-secondary" type="button" onClick={() => startEdit(task)}>Edit</button>
                 <button className="btn-danger" type="button" onClick={() => deleteTask(task._id)}>Delete</button>
-              </div>
+              </div>}
             </>
           )}
         </div>

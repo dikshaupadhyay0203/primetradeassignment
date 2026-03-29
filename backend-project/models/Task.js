@@ -14,15 +14,17 @@ const taskSchema = new mongoose.Schema({
     enum: ["pending", "in progress", "completed"],
     default: "pending",
   },
-    createdBy: {
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  // Legacy field kept for backward compatibility with older records.
+  createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-   createdAt: {
-    type: Date,
-    default: Date.now
-   }
-});
+}, { timestamps: true });
 
 const Task = mongoose.model("Task", taskSchema);
 export default Task;

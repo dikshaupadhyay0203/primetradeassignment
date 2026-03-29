@@ -1,26 +1,33 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 
 function Register() {
 
     const[name, setName] = useState("");
     const[email, setEmail] = useState("");
     const[password, setPassword] = useState("");
+    const[role, setRole] = useState('user');
+    const[message, setMessage] = useState('');
+    const[errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setMessage('');
+        setErrorMessage('');
         try {
-            await axios.post("http://localhost:5000/api/auth/register", {
+            const res = await api.post('/auth/register', {
                 name,
                 email,
-                password
+                password,
+                role,
             });
-            alert("Registration successful!");
+            localStorage.setItem('token', res.data.data.token);
+            setMessage(res.data.message || 'Registration successful');
             navigate("/login");
         } catch (error) {
-            console.log("Registration failed:", error);
+            setErrorMessage(error.response?.data?.message || 'Registration failed');
         }
     };
 
@@ -28,6 +35,8 @@ function Register() {
         <div className="auth-page">
             <div className="auth-card">
             <h2>Register</h2>
+            {message && <p>{message}</p>}
+            {errorMessage && <p>{errorMessage}</p>}
             <form className="auth-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -50,6 +59,15 @@ function Register() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+                {/* Role selector for RBAC testing and admin/user account creation */}
+                <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    required
+                >
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
                 <button type="submit">Register</button>
             </form>
             </div>
