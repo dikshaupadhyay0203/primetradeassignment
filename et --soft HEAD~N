@@ -1,0 +1,137 @@
+[33mcommit 1dbffa51616e77169e18a23db1a2936119aa49db[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Diksha Kumari <dikshaupadhyay0203@gmail.com>
+Date:   Mon Mar 30 00:40:12 2026 +0530
+
+    added readme.md
+
+[33mcommit 5db1485164e430aa99c17544d31f9d0b151b1f24[m
+Author: Rama kumari <kumari09rama@gmail.com>
+Date:   Sun Mar 29 21:53:09 2026 +0530
+
+    added readme file
+
+[33mcommit 8f8576b40533ace65f065eafde44f93d3ef835b4[m
+Author: Rama kumari <kumari09rama@gmail.com>
+Date:   Sun Mar 29 21:45:27 2026 +0530
+
+    added crud operations
+
+[33mcommit 8b58dd19fed6dd513c96e265432a7f1d0b22fc4f[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 15:34:18 2026 +0530
+
+    Removed node_modules from repo
+
+[33mcommit fd4a1c2a92e75f49be0edaa03ba3222900c197d3[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 15:30:00 2026 +0530
+
+    added deployment link
+
+[33mcommit b80bb6a1d3e2323c483840447d60040c5e79edb5[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 15:27:20 2026 +0530
+
+    added deployment link in deployment.txt
+
+[33mcommit 7abe54cf33e86d3e1944b025ffcbdb41d05ad0fb[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 14:55:53 2026 +0530
+
+    improved ui
+
+[33mcommit fc3f3093e27422fd3f3ad86238a5a92296efff54[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 14:32:01 2026 +0530
+
+    added update and delete
+
+[33mcommit c1980bc0a37ba9e3ac66f522e4d5cd436c86a54c[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 14:16:44 2026 +0530
+
+    Added Logout functionality
+
+[33mcommit 35677cf3c55f763e4c52e9496ffe35024f4e6259[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 14:13:00 2026 +0530
+
+    Added Mark Completed button and useEffect
+
+[33mcommit e23b15c4f803c72c6b405f8cbbd6b32f77f0506d[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 14:03:55 2026 +0530
+
+    Added Create Task functionality in Dashboard
+
+[33mcommit 71c8683a32847b76683eb76bacbd6cfe8baf451d[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 14:01:05 2026 +0530
+
+    Added Dashboard page and route
+
+[33mcommit 720082d5232a9fa0301d02397f88abf9f6e34a78[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 13:57:00 2026 +0530
+
+    Added Login page and stored JWT token
+
+[33mcommit db97465a6608b9e28ec7d2890b9b6b815ecc40f4[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 13:48:58 2026 +0530
+
+    Added default route to Register page
+
+[33mcommit 26628d8f0d0a0ce484e68d3b146b5c45e85d7696[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 13:22:06 2026 +0530
+
+    Created React app using Vite
+
+[33mcommit 90f549874c3f331d74a472272a609cfc5c3ab37b[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 10:59:26 2026 +0530
+
+    Tested Update Task API
+
+[33mcommit 9a0edb2defab14b8b88f5365ab40bd726981413b[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 10:36:28 2026 +0530
+
+    Added JWT auth middleware
+
+[33mcommit faa6bd4011e4b94b90b20a35679682fc58419b1d[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 10:26:42 2026 +0530
+
+    Added Register and Login API with JWT
+
+[33mcommit 68b85d777a7602243727b18df88cdbee55bc8d7a[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 10:10:55 2026 +0530
+
+    Created User and Task Model
+
+[33mcommit 31db2f4d499fdea59720ba1e589d251cd8d3dbe3[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 10:02:39 2026 +0530
+
+    Connected MongoDB
+
+[33mcommit 6a1992180b2cd02a2a3ec48acf12008daa5ec16d[m
+Author: dikshaupadhyay0203 <dikshaupadhyay0203@gmail.com>
+Date:   Fri Feb 27 09:39:26 2026 +0530
+
+    initial commit
+
+[33mcommit 7811ee18c87b6cf77bab178400c4478b71742613[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Fri Feb 27 03:42:05 2026 +0000
+
+    add deadline
+
+[33mcommit 632f5576dea3ddcca348c842d74e42325381a460[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Thu Feb 26 19:39:56 2026 +0000
+
+    Initial commit
